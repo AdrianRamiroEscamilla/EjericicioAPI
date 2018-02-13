@@ -6,8 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EjercicioAPI</title>
     <style>
+        @font-face {
+        font-family: PokemonSolid;
+        src: url(fuente/PokemonSolid.ttf);
+        }
+
         #cuadroBusqueda
         {
+            
             border: solid 2px; 
             -moz-border-image: url(imagen/pikaborde.png) 10 round;
             -webkit-border-image: url(imagen/pikaborde.png)10 round;
@@ -60,14 +66,40 @@
                 {
                     var carta = objeto_json.cards[i];
                     var divcarta = document.createElement("div");
-                    var elemento = document.createElement("h1");
+                    var elemento = document.createElement("h3");
                     var fotocarta = document.createElement("img");
 
                     elemento.innerHTML = carta.name;
                     fotocarta.src = carta.imageUrl;
                     
-                    divcarta.style.display = "inline";
+                    elemento.style.fontFamily = "PokemonSolid"; 
+                    elemento.style.textAlign = "center";
+                    
+                    var tipoPokemon = carta.types;
+                    console.log(tipoPokemon);
+                    
+                    switch(carta.types)
+                    {
+                        case agua:
+                            
+                            elemento.style.color ="#3379D8";
+                         break;
+
+                        default:
+                            
+                            elemento.style.color ="#F8DB05";
+                            
+                    }
+                    
+                    elemento.style.border = "solid 4px #DFC60A";
+                    elemento.style.borderRadius = "5px";
+
+                    divcarta.style.float = "left";
                     divcarta.style.width = "20%";
+                    divcarta.style.height = "450px";
+                    divcarta.style.marginBottom = "50px";
+                    
+
                     divcarta.appendChild(elemento);
                     divcarta.appendChild(fotocarta);
 
@@ -87,7 +119,7 @@
         
         fondo=document.getElementById("fondo");
         fondo.style.width = "97%"
-        fondo.style.height = "1000px"
+        //fondo.style.height = "1000px";
         fondo.style.backgroundImage = "url('imagen/fondo.jpg')";
         fondo.style.border = "double grey 10px";
         fondo.style.borderRadius = "1%";
@@ -105,13 +137,13 @@
         cabecera.style.borderRadius = "25%";
         cabecera.style.position = "relative";
         cabecera.style.top = "20px";
-        cabecera.style.left= "17%";
+        cabecera.style.left= "16%";
         cabecera.style.backgroundRepeat = " no-repeat";
 
         imagen = document.getElementById('imagen');		
 		imagen.src = "imagen/cabecera.png";
         imagen.style.width = "100%";
-        imagen.style.height= "100%";
+        imagen.style.height= "95%";
         imagen.style.position = "relative";
 
 
@@ -120,7 +152,7 @@
         bloqueCartas.style.height = "100%";
         bloqueCartas.style.position = "relative";
         bloqueCartas.style.left = "5%";
-        bloqueCartas.style.top = "10%";
+        bloqueCartas.style.top = "50px";
 
         cuadroBusqueda=document.getElementById("cuadroBusqueda");
         cuadroBusqueda.style.width = "100%";
@@ -137,6 +169,8 @@
          *nationalPokedexNumber: numero
          *
          */
+        fuego = "Fire";
+        agua = "Water";
         cuadroCartas = document.getElementById("cartas")
 
          descargaArchivo();
