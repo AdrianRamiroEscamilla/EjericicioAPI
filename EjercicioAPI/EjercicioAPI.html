@@ -12,6 +12,15 @@
             -moz-border-image: url(imagen/pikaborde.png) 10 round;
             -webkit-border-image: url(imagen/pikaborde.png)10 round;
             -o-border-image: url(imagen/pikaborde.png)10 round;
+
+            background: rgba(19,28,36,1);
+            background: -moz-linear-gradient(left, rgba(19,28,36,1) 0%, rgba(5,110,197,1) 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(19,28,36,1)), color-stop(100%, rgba(5,110,197,1)));
+            background: -webkit-linear-gradient(left, rgba(19,28,36,1) 0%, rgba(5,110,197,1) 100%);
+            background: -o-linear-gradient(left, rgba(19,28,36,1) 0%, rgba(5,110,197,1) 100%);
+            background: -ms-linear-gradient(left, rgba(19,28,36,1) 0%, rgba(5,110,197,1) 100%);
+            background: linear-gradient(to right, rgba(19,28,36,1) 0%, rgba(5,110,197,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#131c24', endColorstr='#056ec5', GradientType=1 );
         }
     </style>
 </head>
@@ -44,31 +53,67 @@
                 objeto_json = eval("(" + respuesta_json + ")");
 
                 console.log(objeto_json);
+
+                console.log(objeto_json.cards[1]);
+
+                for(var i = 0; i<50; i++)
+                {
+                    var carta = objeto_json.cards[i];
+                    var divcarta = document.createElement("div");
+                    var elemento = document.createElement("h1");
+                    var fotocarta = document.createElement("img");
+
+                    elemento.innerHTML = carta.name;
+                    fotocarta.src = carta.imageUrl;
+                    
+                    divcarta.style.display = "inline";
+                    divcarta.style.width = "20%";
+                    divcarta.appendChild(elemento);
+                    divcarta.appendChild(fotocarta);
+
+                    cuadroCartas.appendChild(divcarta);
+
+
+                }
             }
         }
         
     }
+
+   
     window.onload = function()
     {
 
-        descargaArchivo();
+        
         fondo=document.getElementById("fondo");
-        fondo.style.width = "100%"
+        fondo.style.width = "97%"
         fondo.style.height = "1000px"
         fondo.style.backgroundImage = "url('imagen/fondo.jpg')";
         fondo.style.border = "double grey 10px";
         fondo.style.borderRadius = "1%";
         fondo.style.position = "absolute";
+        fondo.style.left = "1%";
 
         cabecera=document.getElementById("cabecera");
-        cabecera.style.width = "1200px"
+        cabecera.style.width = "70%"
         cabecera.style.height = "300px"
-        cabecera.style.backgroundImage = "url('imagen/cabecera.png')";
+        
+        
+		
+
         cabecera.style.border = "solid 5px blue";
         cabecera.style.borderRadius = "25%";
         cabecera.style.position = "relative";
         cabecera.style.top = "20px";
-        cabecera.style.left= "100px";
+        cabecera.style.left= "17%";
+        cabecera.style.backgroundRepeat = " no-repeat";
+
+        imagen = document.getElementById('imagen');		
+		imagen.src = "imagen/cabecera.png";
+        imagen.style.width = "100%";
+        imagen.style.height= "100%";
+        imagen.style.position = "relative";
+
 
         bloqueCartas=document.getElementById("bloqueCartas");
         bloqueCartas.style.width = "90%";
@@ -80,15 +125,27 @@
         cuadroBusqueda=document.getElementById("cuadroBusqueda");
         cuadroBusqueda.style.width = "100%";
         cuadroBusqueda.style.height = "300px";
-        cuadroBusqueda.style.backgroundColor = "white";
+        //cuadroBusqueda.style.backgroundColor = "#056EC5";
         cuadroBusqueda.style.borderRadius = "25px";
+        /*
+         *TYPES: FIRE,WATER, METAL, GRASS, Psychic,Darkness,Lightning,Fighting,Colorless
+         *
+         *SUPERTYPE: Energy, Trainer, Pokémon
+         *
+         *rarity:Rare, Rare Holo, Common, Rare Holo EX,Rare Holo Lv.X, Rare Ultra,Rare Secret
+         *
+         *nationalPokedexNumber: numero
+         *
+         */
+        cuadroCartas = document.getElementById("cartas")
 
+         descargaArchivo();
 
     }
 </script>
 <body>
    <div id="fondo">
-        <div id="cabecera"></div>
+        <div id="cabecera"><img id="imagen" src=""/></div>
         <div id="bloqueCartas">
             <div id="cuadroBusqueda"></div>
             <div id="cartas"></div>    
@@ -96,3 +153,4 @@
     </div> 
 </body>
 </html>
+
